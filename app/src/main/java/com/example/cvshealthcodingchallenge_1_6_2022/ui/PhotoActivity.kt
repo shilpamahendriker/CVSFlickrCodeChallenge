@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.ViewModelProvider
 import coil.compose.rememberImagePainter
+import com.example.cvshealthcodingchallenge_1_6_2022.R
 import com.example.cvshealthcodingchallenge_1_6_2022.backend.FlickrAPIService
 import com.example.cvshealthcodingchallenge_1_6_2022.backend.Repository
 import com.example.cvsheathcodechallenge.models.Items
@@ -95,10 +97,9 @@ class PhotoActivity : ComponentActivity() {
         return gson.fromJson(json,type)//returning the list
     }
     private fun saveRecentSearch(recentSearch: String) : List<String>{
-
+        // Call this method on Search button click
         val listSavedInSharedPrefs : MutableList<String> = retrieveSharedPrefList()
 
-        // Call this method on Search button click
         if (listSavedInSharedPrefs.size < 5){
             listSavedInSharedPrefs.add(0,recentSearch)
         } else {
@@ -132,7 +133,7 @@ fun LandingView(){
 //            horizontalAlignment = Arrangement.CenterHorizontally
         ) {
             Text(
-                text = "Use the top search bar to search your favourite photos on Flickr",
+                text = stringResource(id = R.string.use_top_search_bar_text),
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold
             )
@@ -157,7 +158,6 @@ fun LoadingIndicator(){
                 .fillMaxWidth()
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Arrangement.CenterHorizontally
         ) {
             CircularProgressIndicator()
         }
@@ -173,10 +173,9 @@ fun EmptyStateView(){
                 .fillMaxWidth()
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Arrangement.CenterHorizontally
         ) {
             Text(
-                text = "Did not match any images, try another search",
+                text = stringResource(id = R.string.did_not_match),
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold
             )
@@ -196,7 +195,7 @@ fun ErrorStateView(){
 //            horizontalAlignment = Arrangement.CenterHorizontally
         ) {
             Text(
-                text = "Oops something went wrong, try again later",
+                text = stringResource(id = R.string.something_went_wrong_text),
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold
             )
@@ -239,7 +238,7 @@ fun PhotoStateView( photos: List<Items> ){
                     )
                     Image(
                         painter = painter,
-                        contentDescription = "Image loaded",
+                        contentDescription = stringResource(id = R.string.image_loaded),
                         modifier = Modifier
                             .size(75.dp)
                             .padding(4.dp),
@@ -375,7 +374,7 @@ fun SearchHeader(photoActivityViewModel : PhotoActivityViewModel) {
 
         ) {
             Text(
-                text = "Search",
+                text = stringResource(id = R.string.search_button_text),
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
             )
